@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "archlink",
+  "version": "${version}",
+
+  "name": "ArchLink",
+  "description": "",
+  "authors": [],
+  "contact": {},
+
+  "license": "MIT",
+  "icon": "icon.png",
+
+  "environment": "server",
+  "entrypoints": {
+    "main": [
+      "net.conczin.archlink.fabric.ArchLinkFabric"
+    ]
+  },
+  "mixins": [
+    "archlink.mixins.json",
+    "archlink-common.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.22",
+    "minecraft": ">=1.20.1"
+  }
+}
