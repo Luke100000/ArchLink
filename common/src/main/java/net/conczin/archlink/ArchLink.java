@@ -34,9 +34,16 @@ public class ArchLink {
             }
             ArchLink.LOGGER.info(player.getName() + " joined as " + model.nickname() + " (ID: " + model.id() + ")");
         } catch (Exception e) {
-            ArchLink.LOGGER.error(player.getName() + " login was rejected: " + e.getMessage(), e);
-            ServerPlayer sp = (ServerPlayer) player;
-            sp.connection.disconnect(new TextComponent("You are not whitelisted").getAsComponent());
+            RoleAPI.INSTANCE.get(player.getStringUUID().replace("_", ""), r -> {
+                ArchLink.LOGGER.info(player.getName() + " tried to join but is not whitelisted by Sam, trying Hagrid...");
+                if (r != null && r.isLinked()) {
+                    ArchLink.LOGGER.info(player.getName() + " joined via Hagrid");
+                } else {
+                    ArchLink.LOGGER.error(player.getName() + " login was rejected: " + e.getMessage(), e);
+                    ServerPlayer sp = (ServerPlayer) player;
+                    sp.connection.disconnect(new TextComponent("You are not whitelisted").getAsComponent());
+                }
+            });
         }
     }
 
